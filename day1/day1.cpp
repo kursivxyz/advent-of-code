@@ -14,12 +14,12 @@ int main () {
     std::string line;
     
     int num = 0;
-    std::vector<int> numberVector = {0};
+    int highestNumber = 0;
 
     while (std::getline(input, line)) {
         if (line.empty()) {
-            if (numberVector.at(0) < num) {
-                numberVector.push_back(num);
+            if (num > highestNumber) {
+                highestNumber = num;
                 num = 0;
             }
         } else {  
@@ -27,9 +27,8 @@ int main () {
         }
     }
 
-    for (int element : numberVector) {
-        std::cout << element << std::endl;
-    }
+    std::cout << highestNumber << std::endl;
+    
     input.close();
     return 0;
 }
