@@ -1,30 +1,35 @@
-
 #include <iostream>
 #include <fstream>
-int main () {
+#include <vector>
 
+
+
+int main () {
     std::ifstream input("test_input.txt");
     if (!input.is_open()) {
-        std::cerr << "failed to open file" << std::endl;
-
+        std::cerr << "failed to open file." << std::endl;
         return 1;
     }
 
-    int numberGroupOne = 0;
     std::string line;
+    
+    int num = 0;
+    std::vector<int> numberVector = {0};
 
     while (std::getline(input, line)) {
-        int num = 0;
         if (line.empty()) {
-            num = 0;
-        } else {
-            num = std::stoi(line); 
+            if (numberVector.at(0) < num) {
+                numberVector.push_back(num);
+                num = 0;
+            }
+        } else {  
+            num += std::stoi(line);
         }
-            numberGroupOne += num;
     }
 
+    for (int element : numberVector) {
+        std::cout << element << std::endl;
+    }
     input.close();
-
-    std::cout << numberGroupOne << std::endl;
     return 0;
 }
