@@ -5,7 +5,7 @@
 
 
 int main () {
-    std::ifstream input("test_input.txt");
+    std::ifstream input("input.txt");
     if (!input.is_open()) {
         std::cerr << "failed to open file." << std::endl;
         return 1;
@@ -18,10 +18,8 @@ int main () {
 
     while (std::getline(input, line)) {
         if (line.empty()) {
-            if (num > highestNumber) {
-                highestNumber = num;
-                num = 0;
-            }
+            highestNumber = std::max(highestNumber, num);
+            num = 0;
         } else {  
             num += std::stoi(line);
         }
