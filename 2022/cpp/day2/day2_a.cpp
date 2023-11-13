@@ -56,8 +56,14 @@ int main() {
 
     while(getline(input, line)) {
         line = trimAllWhitespace(line);
+        
+        // TEMP TEST, PLS REMOVE 
         if (line.substr(0, 1) =="A" ) {
             cout << "hehe" << endl;
+        }
+
+        if (line.substr(1, 1) == "Y") {
+            cout << "hihi" << endl;
         }
     }
 }
