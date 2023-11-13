@@ -5,7 +5,7 @@
 
 
 int main () {
-    std::ifstream input("input.txt");
+    std::ifstream input("../../input/day1_input.txt");
     if (!input.is_open()) {
         std::cerr << "failed to open file." << std::endl;
         return 1;

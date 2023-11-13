@@ -7,7 +7,7 @@
 
 
 int main () {
-    std::ifstream input("input.txt");
+    std::ifstream input("../../input/day1_input.txt");
     if (!input.is_open()) {
         std::cerr << "failed to open file." << std::endl;
         return 1;
@@ -36,7 +36,7 @@ int main () {
         }
     }
 
-    std::cout << elfs.size() << std::endl;
+    #std::cout << elfs.size() << std::endl;
     int sum = std::accumulate(elfs.begin(), elfs.end(), 0);
     std::cout << sum << std::endl;
     

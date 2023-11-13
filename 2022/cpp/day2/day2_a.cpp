@@ -43,7 +43,7 @@ string trimAllWhitespace(const string& str) {
 
 int main() {
     vector<int> roundScores;
-    ifstream input("input.txt");
+    ifstream input("../../input/day1_input.txt");
     if(!input.is_open()) {
         cerr << "failed to open file." << endl;
         return 1;
