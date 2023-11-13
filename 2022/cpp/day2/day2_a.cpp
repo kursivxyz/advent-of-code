@@ -43,7 +43,7 @@ string trimAllWhitespace(const string& str) {
 
 int main() {
     vector<int> roundScores;
-    ifstream input("../../input/day1_input.txt");
+    ifstream input("../../input/day2_test_input.txt");
     if(!input.is_open()) {
         cerr << "failed to open file." << endl;
         return 1;
@@ -56,6 +56,8 @@ int main() {
 
     while(getline(input, line)) {
         line = trimAllWhitespace(line);
-
+        if (line.substr(0, 1) =="A" ) {
+            cout << "hehe" << endl;
+        }
     }
 }
