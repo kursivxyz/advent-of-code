@@ -80,14 +80,13 @@ string determineResult(string opponent, string player) {
 int main() {
     int totalScore = 0;
     int roundNumber = 0;
-    ifstream input("../../input/day2_test_input.txt");
+    ifstream input("../../input/day2_input.txt");
     if(!input.is_open()) {
         cerr << "failed to open file." << endl;
         return 1;
     }
 
     string line;
-
     map<string, int> playScores = initPlayScoreMap();
     map<string, int> resultScores = initResultScoreMap();
 
@@ -95,20 +94,14 @@ int main() {
         roundNumber++;
         line = trimAllWhitespace(line);
         int roundScore = 0;
-        string opponentChoice = line.substr(0, 1);            
-        string playerChoice = line.substr(1, 1);
 
-        string opponentPlayed = played(opponentChoice);
-        string playedPlayed = played(playerChoice);
+        string playedPlayed = played(line.substr(1,1));
         roundScore += retrieveScores(playScores, playedPlayed);
 
-        string result = determineResult(opponentPlayed, playedPlayed);
+        string result = determineResult(played(line.substr(0,1)), playedPlayed);
         roundScore += retrieveScores(resultScores, result);        
 
         totalScore += roundScore;
-
-        //cout << "Opponents choice: " +  opponentChoice + " - " + "Players choice: " + playerChoice << endl;
-        //cout << "Opponents played: " + opponentPlayed + " - " + "Player played: " + playedPlayed << endl;
         cout << "Round " << roundNumber << " score: " << roundScore << endl;
     }
     cout << "Total score: " << totalScore<< endl;
