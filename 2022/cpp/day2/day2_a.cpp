@@ -13,7 +13,9 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <numeric>
 #include <string>
+#include <tuple>
 #include <vector>
 
 using namespace std;
@@ -27,12 +29,36 @@ map<string, int> initPlayScoreMap() {
     return playScoreMap;
 }
 
+int retrieveScores(map<string, int> map, string key) {
+    int point;
+    auto score = map.find(key);
+
+    if (score != map.end()) {
+        return score->second;
+    } 
+    return 0;
+}
+
 map<string, int> initResultScoreMap() {
     map<string, int> resultScoreMap;
-    resultScoreMap["LOSS"] = 0;
-    resultScoreMap["DRAW"] = 3;
-    resultScoreMap["WIN"] = 6;
+    resultScoreMap["loss"] = 0;
+    resultScoreMap["draw"] = 3;
+    resultScoreMap["win"] = 6;
     return resultScoreMap;
+}
+
+string played(string playCode) {
+    map<string, string> map;
+    map["AX"] = "rock";
+    map["BY"] = "paper";
+    map["CZ"] = "scissors";
+
+    for (const auto& pair: map) {
+        if (pair.first.find(playCode) != string::npos) {
+            return pair.second;
+        }
+    }
+    return "";
 }
 
 string trimAllWhitespace(const string& str) {
@@ -41,8 +67,19 @@ string trimAllWhitespace(const string& str) {
     return result;
 }
 
+string determineResult(string opponent, string player) {
+    if (opponent == player ) return "draw";
+    if ((opponent== "rock" && player == "scissors") ||
+            (opponent == "paper" && player == "rock") ||
+            (opponent == "scissors" && player == "paper")) {
+        return "loss";
+    } 
+    return "win";
+}
+
 int main() {
-    vector<int> roundScores;
+    int totalScore = 0;
+    int roundNumber = 0;
     ifstream input("../../input/day2_test_input.txt");
     if(!input.is_open()) {
         cerr << "failed to open file." << endl;
@@ -55,6 +92,24 @@ int main() {
     map<string, int> resultScores = initResultScoreMap();
 
     while(getline(input, line)) {
+        roundNumber++;
         line = trimAllWhitespace(line);
+        int roundScore = 0;
+        string opponentChoice = line.substr(0, 1);            
+        string playerChoice = line.substr(1, 1);
+
+        string opponentPlayed = played(opponentChoice);
+        string playedPlayed = played(playerChoice);
+        roundScore += retrieveScores(playScores, playedPlayed);
+
+        string result = determineResult(opponentPlayed, playedPlayed);
+        roundScore += retrieveScores(resultScores, result);        
+
+        totalScore += roundScore;
+
+        //cout << "Opponents choice: " +  opponentChoice + " - " + "Players choice: " + playerChoice << endl;
+        //cout << "Opponents played: " + opponentPlayed + " - " + "Player played: " + playedPlayed << endl;
+        cout << "Round " << roundNumber << " score: " << roundScore << endl;
     }
+    cout << "Total score: " << totalScore<< endl;
 }
