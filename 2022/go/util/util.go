@@ -3,6 +3,7 @@ package util
 import (
 	"log"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -45,4 +46,13 @@ func FindMax(ints []int) int {
         }
     } 
     return max
+}
+
+func FindTopX(ints []int, amount int) int {
+    sort.Ints(ints)
+    var topSum int
+    for i := 0; i < amount; i++ {
+        topSum += ints[len(ints)-1-i]
+    }
+    return topSum
 }
