@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"kursiv/aoc/util"
-	"sort"
 )
 
 func main() {
@@ -40,10 +39,7 @@ func part2(input []int) int {
         }
         sum += value 
     }
-    sort.Ints(total)
-    var topSum int
-    for i := 0; i < 3; i++ {
-        topSum += total[len(total)-1-i]
-    }
-    return topSum
+    ans := util.FindTopX(total, 3)
+
+    return ans
 }
