@@ -14,7 +14,7 @@ func Get_input_str(input string) []string {
         log.Fatal("something gon wrong lol")
     }
 
-    return strings.Split(string(content), "\n")
+    return strings.Split(strings.TrimSpace(string(content)), "\n")
 }
 
 func Get_input_int(input string) []int {
