@@ -51,7 +51,7 @@ func FindMax(ints []int) int {
 func FindTopX(ints []int, amount int) int {
     sort.Ints(ints)
     var topSum int
-    for i := 0; i < amount; i++ {
+    for i := 0; i < amount && i <len(ints); i++ {
         topSum += ints[len(ints)-1-i]
     }
     return topSum

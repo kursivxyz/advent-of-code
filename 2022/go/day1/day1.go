@@ -19,7 +19,7 @@ func part1(input []int) int {
     total := []int{}
     var sum int;
     for _, value := range input { 
-        if value == 0 {
+        if value == 0 && sum != 0 {
             total = append(total, sum) 
             sum = 0
         }
