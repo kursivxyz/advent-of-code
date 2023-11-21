@@ -12,6 +12,8 @@ func main() {
     input := util.Get_input_str("input.txt")
     ans1 := part1(input)
     fmt.Println("Answer part1: ", ans1)
+    ans2 := part2(input)
+    fmt.Println("Answer part2: ", ans2)
 }
 
 
@@ -32,6 +34,21 @@ func part1(input []string) int {
     return sum;
 }
 
+func part2(input []string) int {
+    var sum int;
+    for _, line := range input {
+        separatorPos := strings.Index(line, ",")
+        first := line[:separatorPos]
+        second:= strings.TrimLeft(line[separatorPos:], ",")
+
+        start1, end1 := getRanges(first)
+        start2, end2 := getRanges(second)
+        if (start1 <= end2 && start2 <= end1) {
+            sum++
+        }
+    }
+    return sum
+}
 
 func getRanges(string string) (int, int) {
     parts := strings.Split(string, "-")
