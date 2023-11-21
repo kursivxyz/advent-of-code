@@ -10,10 +10,12 @@ func main() {
     input := util.Get_input_str("input.txt")
     ans1 := part1(input)
     fmt.Println("Answer part 1: ", ans1)
+    
+    ans2 := part2(input)
+    fmt.Println("Answer part 2: ", ans2)
 }
 
 func part1(input []string) int {
-    fmt.Println(len(input))
     var score int; 
     for _, line := range input {
         parts := strings.Split(line, " ")
@@ -22,6 +24,54 @@ func part1(input []string) int {
         score += played(player) + result(opponent, player)
     } 
     return score
+}
+
+func part2(input []string) int {
+    var score int;
+    for _, line := range input {
+        parts := strings.Split(line, " ")
+        opponent := normalizePlayCode(parts[0])
+        desiredOutcome := normalizeDesiredOutcome(parts[1])
+        neededPlay := neededPlay(opponent, desiredOutcome)
+        score += played(neededPlay) + result(opponent, neededPlay)
+    } 
+    return score;
+}
+
+func neededPlay(opponent string, desiredOutcome string) string {
+    if (desiredOutcome == "WIN") {
+        return getWinningPlay(opponent)
+    }
+    if (desiredOutcome == "LOSE") {
+        return getLosingPlay(opponent)
+    }
+    return opponent
+}
+
+func getWinningPlay(opponent string) string {  
+    if (opponent == "SCISSOR") {
+        return "ROCK"
+    } 
+    if (opponent == "ROCK") {
+        return "PAPER"
+    }
+    if (opponent == "PAPER") {
+        return "SCISSOR"
+    }
+    return ""
+}
+
+func getLosingPlay(opponent string) string {
+    if (opponent == "SCISSOR") {
+        return "PAPER"
+    }
+    if (opponent == "PAPER") {
+        return "ROCK"
+    }
+    if (opponent == "ROCK") {
+        return "SCISSOR"
+    }
+    return ""
 }
 
 func played(played string) int {
@@ -56,6 +106,19 @@ func normalizePlayCode(played string) string {
     } 
     if (played == "C" || played == "Z")  {
         return "SCISSOR"
+    }
+    return "";
+}
+
+func normalizeDesiredOutcome(outcome string) string {
+    if (outcome == "Z") {
+        return "WIN"
+    }
+    if (outcome == "Y") {
+        return "DRAW"
+    }
+    if (outcome == "X") {
+        return "LOSE"
     }
     return "";
 }
