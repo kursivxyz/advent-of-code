@@ -52,7 +52,6 @@ func part2(input []string) int {
                     break
                 }
                 sharedChars[item] = true
-                fmt.Println(item, " - ", getPriority(string(item)))
                 sum += getPriority(string(item))
             }
          }
