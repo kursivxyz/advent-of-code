@@ -14,3 +14,10 @@ fn part1(input: &str) -> u32 {
         .sum()
 }
 
+const DIGITS: &[&str] = &[
+    "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+];
+fn part2(input: &str) -> u32 {
+    
+    1
+}
