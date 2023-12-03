@@ -1,7 +1,6 @@
 fn main(){
     let input = include_str!("./input/01.txt");
     println!("Part 1: {}", part1(input)); 
-    println!("Part 2: {}", part2(input));
 }
 
 fn part1(input: &str) -> u32 {
@@ -14,10 +13,3 @@ fn part1(input: &str) -> u32 {
         .sum()
 }
 
-const DIGITS: &[&str] = &[
-    "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-];
-fn part2(input: &str) -> u32 {
-    
-    1
-}
