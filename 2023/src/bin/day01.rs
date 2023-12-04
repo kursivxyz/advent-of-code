@@ -41,9 +41,8 @@ fn part2(input: &str) -> u32 {
         input
             .lines()
             .map(|line| {
-                let first_digit = (0..line.len()).find_map(|i| valid_digits.keys().find(|x| line[i..].starts_with(*x))).unwrap();
-                let last_digit = (0..line.len()).find_map(|i| valid_digits.keys().find(|x| line[..line.len()-i].ends_with(*x))).unwrap();
-                valid_digits[first_digit] * 10 + valid_digits[last_digit]
+                valid_digits[(0..line.len()).find_map(|i| valid_digits.keys().find(|x| line[i..].starts_with(*x))).unwrap()] * 10 +
+                valid_digits[(0..line.len()).find_map(|i| valid_digits.keys().find(|x| line[..line.len()-i].ends_with(*x))).unwrap()]
             })
             .sum()
 }
